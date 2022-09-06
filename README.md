@@ -10,5 +10,6 @@
 >Our shell currently handles the executions of executables found in the environmental variable 'PATH'.
 >Some of the commands that our custom shell supports include /bin/ls, pwd, env, etc.
 
-###Some of the allowed functions and system calls
+* **Some of the allowed functions and system calls
+access  ,
 
