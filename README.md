@@ -31,7 +31,7 @@ Paul Walter Adansi and Joseph Tingan
 > * ```envset_unset.c```: this file contains functions that handles the environment, setting it and also unsetting it.
 > * ```execute.c```: this file contains functions to convert sting to token and handles the execution of a file given as \
 > input.
-> * ```holberton.h```: handles all the prototypes used in this repository.
+> * ```main.h```: handles all the prototypes used in this repository.
 > * ```man_1_simple_shell```: This is a manual description of what our shell is and its content and also an example to il\
 > lustrate how it works.
 > * ```path_handler.c```: this funtion contains functions to get the path of the command, retrive the environment, and re\
