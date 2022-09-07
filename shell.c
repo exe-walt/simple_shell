@@ -1,54 +1,47 @@
-#include "main.h"
-
+#include "shell.h"
 /**
- *main - Displays a prompt and waits for the user to enter a command
- *Return: 0 on success
- */
-int main(int argc, char *argv[])
+*INThandler - fuction invoked for a signal function and show the prompt
+*@sig_n: number of the signal
+*/
+void INThandler(int sig_n)
 {
+	(void)sig_n;
+	write(STDOUT_FILENO, "\n($) ", 5);
+}
+/**
+*main - Program that is a simple UNIX command interpreter
+*@argc: argument count
+*@argv: argument char-pointers array
+*@env: the environment
+*Return: 0
+*/
+int main(int argc, char **argv, char **env)
+{
+	char *line = NULL;
+	char **commands;
+	size_t bufsize = 0;
+	ssize_t line_len = 0, count = 0;
+	int exit_st = 0;
 	(void)argc;
-	char **tokens;
-	char *line;
-	int status;
-	struct stat st;
 
-	signal(SIGINT, ctrl_c);
-	if (fstat(0, &st) == -1)
-		perror("fstat");
-	status = 1;
-	do {
-/*print prompt if command is not piped*/
-		print_prompt();
-/*read input from stdin*/
-		line = read_line();
-		if (_strcmp(line, "\n") == 0)
-		{
-			tokens = NULL;
-			free(line);
+	while (1)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "($) ", 4);
+		signal(SIGINT, INThandler);
+		line_len = getline(&line, &bufsize, stdin);
+		count++;
+		if (special_case(line, line_len, &exit_st) == 3)
 			continue;
-		}
-		get_history(line);
-/*split the line into tokens*/
-		tokens = _strtotokens(line);
-		if (tokens[0] == NULL)
-		{
-			free(tokens);
-			free(line);
-			continue;
-		}
-/*handle exit invokation*/
-		if (_strcmp(tokens[0], "exit") == 0)
-		{
-			shell_exit(tokens, line);
-		}
+		commands = split_line(line);
+		if (_strcmp("exit", *commands) == 0)
+			built_exit(line, commands, &exit_st, count);
+		else if (_strcmp("env", *commands) == 0)
+			built_env(commands, env, &exit_st);
 		else
-		{
-/*execute commands*/
-			status = _execute(tokens, line, argv[0]);
-		}
-/*free memory*/
-		free(line);
-		free(tokens);
-	} while (status == 1);
-	return (status);
+			execute_line(argv, commands, count, env, &exit_st, line);
+		fflush(stdin);
+	}
+	free(line);
+	return (0);
 }
