@@ -1,9 +1,11 @@
 #include "shell.h"
+
 /**
 *_werror - puts a char to the std error
 *@c: character to write
 *Return: int to print
 */
+
 int _werror(char c)
 {
 	return (write(STDERR_FILENO, &c, 1));
@@ -34,6 +36,7 @@ void print_num(int count)
 		powten /= 10;
 	}
 }
+
 /**
 *_error - writes an error message similar to the sh error
 *when command not found
@@ -42,6 +45,7 @@ void print_num(int count)
 *@count: the number of times you have done a command
 *@exit_st: exit status
 */
+
 void _error(char **argv, char *first, int count, int **exit_st)
 {
 	struct stat st;
