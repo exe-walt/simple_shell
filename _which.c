@@ -1,10 +1,12 @@
 #include "shell.h"
+
 /**
 *_which - fuction that looks for files in the current PATH.
 *@commands:the split arguments
 *@env: environment variables.
 *Return: full_path of the command or NULL if it can´t find it
 */
+
 char *_which(char **commands, char **env)
 {
 	list_p *head;
