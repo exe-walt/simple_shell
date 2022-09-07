@@ -1,11 +1,13 @@
 #include "shell.h"
 #include <ctype.h>
 #include <string.h>
+
 /**
 *num_is_positive - function that verify if a string is a positive number
 *@com: string to check
 *Return: 0 on success and -1 if is negative or is not a number
 */
+
 int num_is_positive(char *com)
 {
 	int i = 0;
