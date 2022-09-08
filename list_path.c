@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  *add_node_end - append node to list pointed
  *@head: pointer to pointer
