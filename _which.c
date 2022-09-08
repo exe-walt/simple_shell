@@ -5,7 +5,6 @@
 *@env: environment variables.
 *Return: full_path of the command or NULL if it can´t find it
 */
-
 char *_which(char **commands, char **env)
 {
 	list_p *head;
