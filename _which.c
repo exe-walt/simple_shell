@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 *_which - fuction that looks for files in the current PATH.
 *@commands:the split arguments
