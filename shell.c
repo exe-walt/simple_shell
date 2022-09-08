@@ -1,49 +1,47 @@
-#ifndef SHELL_H
-#define SHELL_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <stddef.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#define TOK_DELIM " \t\r\n\v\a"
+#include "shell.h"
 /**
-* struct list_path - singly linked list
-* @dir: string - (malloc'ed string)
-* @next: points to the next node
-*
-* Description: singly linked list node structure
-* for directories of PATH
+*INThandler - fuction invoked for a signal function and show the prompt
+*@sig_n: number of the signal
 */
-typedef struct list_path
+void INThandler(int sig_n)
 {
-	char *dir;
-	struct list_path *next;
-} list_p;
+	(void)sig_n;
+	write(STDOUT_FILENO, "\n($) ", 5);
+}
+/**
+*main - Program that is a simple UNIX command interpreter
+*@argc: argument count
+*@argv: argument char-pointers array
+*@env: the environment
+*Return: 0
+*/
+int main(int argc, char **argv, char **env)
+{
+	char *line = NULL;
+	char **commands;
+	size_t bufsize = 0;
+	ssize_t line_len = 0, count = 0;
+	int exit_st = 0;
+	(void)argc;
 
-/*Functions of the shell*/
-void execute_line(char **argv, char **commands, int count,
-		  char **env, int *exit_st, char *line);
-char **split_line(char *line);
-list_p *list_path(char **env);
-int _setenv(const char *name, const char *value, int overwrite);
-char *_which(char **commands, char **env);
-void built_exit(char *line, char **arg, int *exit_st, int count);
-void built_env(char **arg, char **env, int *exit_st);
-char *_getenv(const char *name, char **env);
-void _error(char **argv, char *first, int count, int **exit_st);
-int special_case(char *line, ssize_t line_len, int *exit_st);
-void print_num(int count);
-
-/*useful functions*/
-int _strlen(char *s);
-void add_node_end(list_p **head, const char *str);
-char *_strcat(char *s1, char *s2);
-char *_strdup(char *str);
-int _strcmp(char *s1, char *s2);
-void free_loop(char **arr);
-void free_list(list_p *head);
-char *_strncpy(char *dest, char *src, int n);
-#endif /* SHELL_H*/
+	while (1)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "($) ", 4);
+		signal(SIGINT, INThandler);
+		line_len = getline(&line, &bufsize, stdin);
+		count++;
+		if (special_case(line, line_len, &exit_st) == 3)
+			continue;
+		commands = split_line(line);
+		if (_strcmp("exit", *commands) == 0)
+			built_exit(line, commands, &exit_st, count);
+		else if (_strcmp("env", *commands) == 0)
+			built_env(commands, env, &exit_st);
+		else
+			execute_line(argv, commands, count, env, &exit_st, line);
+		fflush(stdin);
+	}
+	free(line);
+	return (0);
+}
