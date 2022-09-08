@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 *free_loop - function for free double pointer array of pointers
 *@arr: double pointer array of pointers
