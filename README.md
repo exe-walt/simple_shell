@@ -60,6 +60,7 @@ echo "/bin/ls" | ./hsh
 (your_terminal)$ ./hsh
 ```
 
+
 #### Illustration
 ```
 a#cisfun$ ls -l                                                                                                         total 80
