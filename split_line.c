@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 *split_line - creates a double pointer array that holders pointers
 *to each string from the command line
@@ -7,7 +6,6 @@
 *Return: double pointer array of pointers that are commands to interpret
 *and execute
 */
-
 char **split_line(char *line)
 {
 	int j = 0;
