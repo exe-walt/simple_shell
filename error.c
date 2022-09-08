@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 *_werror - puts a char to the std error
 *@c: character to write
