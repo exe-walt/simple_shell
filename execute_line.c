@@ -8,7 +8,6 @@
 *@exit_st: exit status
 *@line: buffer of getline
 */
-
 void execute_line(char **argv, char **commands, int count,
 		  char **env, int *exit_st, char *line)
 {
