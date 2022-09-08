@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
 *INThandler - fuction invoked for a signal function and show the prompt
 *@sig_n: number of the signal
