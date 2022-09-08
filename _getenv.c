@@ -6,7 +6,6 @@
  * @env: environ.
  * Return: the value of the variable searched.
  */
-
 char *_getenv(const char *name, char **env)
 {
 	char *comp = NULL;
