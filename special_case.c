@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
 *special_case - function that handle special cases such as:
 *EOF in interactive and non-interactive mode and \n entry
@@ -8,6 +9,7 @@
 *Return: 0 if the entry does not match any special case
 *or 3 if it is a \n
 */
+
 int special_case(char *line, ssize_t line_len, int *exit_st)
 {
 	int i = 0;
