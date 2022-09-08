@@ -1,11 +1,9 @@
 #include "shell.h"
-
 /**
 * _strlen - return length of a string
 * @s: char type
 * Return: length of string
 */
-
 int _strlen(char *s)
 {
 	int len;
@@ -104,4 +102,3 @@ char *_strncpy(char *dest, char *src, int n)
 		*(dest + i) = '\0';
 	return (dest);
 }
-
