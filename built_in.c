@@ -6,7 +6,6 @@
 *@com: string to check
 *Return: 0 on success and -1 if is negative or is not a number
 */
-
 int num_is_positive(char *com)
 {
 	int i = 0;
