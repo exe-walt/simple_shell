@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
 *_execute - function that executes in the main shell
 *@argv: argument char-pointers array
