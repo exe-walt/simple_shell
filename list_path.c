@@ -5,7 +5,6 @@
  *@dir: string to initialize new node
  *Return: new or NULL
  */
-
 void add_node_end(list_p **head, const char *dir)
 {
 	list_p *last = *head;
