@@ -1,7 +1,6 @@
 #include "shell.h"
 #include <ctype.h>
 #include <string.h>
-
 /**
 *num_is_positive - function that verify if a string is a positive number
 *@com: string to check
